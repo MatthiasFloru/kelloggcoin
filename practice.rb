@@ -27,3 +27,62 @@ blockchain = [
 # Anthony's KelloggCoin balance is 2650
 
 # 👇👇👇 Your code HERE 👇👇👇
+
+
+coin_ownership2 = [
+  {"name" => "ben", "num_coins" => 0},
+  {"name" => "brian", "num_coins" => 0},
+  {"name" => "evan", "num_coins" => 0},
+  {"name" => "anthony", "num_coins" => 0}
+]
+
+
+# ben_coins = 0
+# brian_coins = 0
+# evan_coins = 0
+# anothony_coins = 0
+# index = 0
+# index2 = 0
+# loop do
+#   if index == blockchain.size
+#     break
+#   end
+#  loop do
+#   if index2 = coin_ownership.size
+#     break
+#   index2=0
+#   end
+#   if blockchain[index][:to_user] == coin_ownership["name"][index2]
+#     coin_ownership["num_coins"][index2] = coin_ownership["num_coins"][index2] + blockchain[index][:amount]
+#   elsif blockchain[index][:from_user] == coin_ownership["name"][index2]
+#     coin_ownership["num_coins"][index2] = coin_ownership["num_coins"][index2] - blockchain[index][:amount]
+#   end
+#   index2 = index2 +1
+# end
+# index = index +1
+# end
+
+
+for transaction in blockchain
+  for person in coin_ownership2
+    if transaction[:to_user] == person["name"]
+      person["num_coins"] = person["num_coins"] + transaction[:amount]
+    end
+    if transaction[:from_user] == nil
+      person["num_coins"] = person["num_coins"]
+    elsif transaction[:from_user] == person["name"]
+      person["num_coins"] = person["num_coins"] - transaction[:amount]
+    end
+  end
+end
+
+index = 0
+loop do
+  if index == coin_ownership2.size
+    break
+  end
+  name = coin_ownership2[index]["name"]
+  num = coin_ownership2[index]["num_coins"]
+  puts "#{name}'s KelloggCoin balance is #{num}"
+  index = index + 1
+end
